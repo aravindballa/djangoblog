@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="../../static/js/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+</head>
+<body>
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="input-field">
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn waves-effect waves light teal">Register</button>
+        </form>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <script src="/static/js/jquery.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/template" id="post-template">
+      <div class="post card-panel">
+        <h3 class="teal-text title"><%- title %></h3>
+
+        <span class="grey-text"><i>Published on <%- new Date(created).toLocaleDateString("en-us") %></i></span>
+        <div class="content"><p><%- $('<p></p>').html($.parseHTML(body.split('\n').join('</p><p>'))).html() %></p></div>
+
+      </div>
+
+    </script>
+
+    <script type="text/template" id="list-template">
+      <div class="post-list">
+
+      </div>
+    </script>
+
+
+  </head>
+  <body class="indigo lighten-5">
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    {% if not user %}<li><a href="{% url 'index' %}">Login</a></li>{% endif %}
+                    {% if user %}
+                        <li><a href="{% url 'index' %}">My Posts</a></li>
+                        <li><a href="{% url 'logout' %}?next={% url 'all' %}">Logout</a></li>
+                    {% endif %}
+                </ul>
+                <ul id="slide-out" class="side-nav">
+                    {% if not user %}<li><a href="{% url 'index' %}">Login</a></li>{% endif %}
+                    {% if user %}
+                        <li><a href="{% url 'index' %}">My Posts</a></li>
+                        <li><a href="{% url 'logout' %}?next={% url 'all' %}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="row">
+      <header class="grey darken-3 col s12">
+        <h1 class="white-text center" style="padding: 50px 0">ALL STORIES</h1>
+      </header>
+    </div>
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large red" href="{% url 'new' %}">
+          <i class="large material-icons">add</i>
+        </a>
+    </div>
+
+    <section class="blogapp">
+      <div class="posts-wrap container">
+        <div class="center">
+        <div class="preloader-wrapper active">
+          <div class="spinner-layer spinner-red-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+
+    </footer>
+
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/underscore.js"></script>
+    <script src="/static/js/backbone.js"></script>
+    <script src="/static/js/models/post.js"></script>
+    <script src="/static/js/collections/public-posts.js"></script>
+    <script src="/static/js/views/post-view-public.js"></script>
+    <script src="/static/js/views/app-view.js"></script>
+    <script src="/static/js/app.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+  </body>
+</html>
